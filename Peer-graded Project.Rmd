@@ -15,8 +15,8 @@ threshold_val <- 0.95 * dim(training)[1]
 
 include_cols <- !apply(training, 2, function(y) sum(is.na(y)) > threshold_val || sum(y=="") > threshold_val)
 training <- training[, include_cols]
-nearZvar <- nearZeroVar(training, saveMetrics = TRUE)
-training <- training[ , nearZvar$nzv==FALSE] 
+Zvariable <- nearZeroVar(training, saveMetrics = TRUE)
+training <- training[ , Zvariable$nzv==FALSE] 
 dim(training)
 
 ```
@@ -25,17 +25,17 @@ dim(training)
 
 
 
-set.seed(32233)
-inTrain = createDataPartition(training$classe, p = 0.7, list=FALSE)
-train1A <- training[inTrain,]
-train2A <- training[-inTrain,]
+set.seed(200)
+inputfortrain = createDataPartition(training$classe, p = 0.7, list=FALSE)
+tr_1 <- training[inputfortrain,]
+tr_2 <- training[-inputfortrain,]
 
-randomForMod <- randomForest(classe~., data=train1A, importance=TRUE)
+randomForMod <- randomForest(classe~., data=tr_1, importance=TRUE)
 randomForMod
 
-train2A_pred <- predict(randomForMod, newdata=train2A)
+tr_2_pred <- predict(randomForMod, newdata=tr_2)
 #  Confusion Matrix here :
-confusionMatrix(train2A_pred, train2A$classe)
+confusionMatrix(tr_2_pred, tr_2$classe)
 # Testing the model on the 'testing' dataset
 testing_pred <- predict(randomForMod, newdata=testing)
 testing_pred
@@ -43,6 +43,6 @@ testing_pred
 
 ## Checking Sample error
 ```{r}
-confM <- confusionMatrix(train2A_pred, train2A$classe)
+confM <- confusionMatrix(tr_2_pred, tr_2$classe)
 sum(diag(confM$table))/sum(confM$table)
 ```
