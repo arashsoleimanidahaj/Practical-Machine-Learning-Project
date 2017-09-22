@@ -119,8 +119,8 @@ $(document).ready(function () {
 </div>
 
 
-<div id="load-and-clean-the-data--" class="section level1">
-<h1>Load and Clean the data ————————————————-</h1>
+<div id="load-and-clean-the-data--" class="section level2">
+<h2>Load and Clean the data ————————————————-</h2>
 <pre class="r"><code>training &lt;- read.csv(&quot;pml-training.csv&quot;, header=TRUE)
 testing &lt;- read.csv(&quot;pml-test.csv&quot;, header=TRUE)
 library(caret)</code></pre>
@@ -147,8 +147,8 @@ training &lt;- training[ , nearZvar$nzv==FALSE]
 dim(training)</code></pre>
 <pre><code>## [1] 19622    53</code></pre>
 </div>
-<div id="modeling--" class="section level1">
-<h1>modeling —————————————————————-</h1>
+<div id="modeling" class="section level2">
+<h2>modeling</h2>
 <pre class="r"><code>set.seed(32233)
 inTrain = createDataPartition(training$classe, p = 0.7, list=FALSE)
 train1A &lt;- training[inTrain,]
@@ -212,8 +212,8 @@ testing_pred</code></pre>
 ##  B  A  B  A  A  E  D  B  A  A  B  C  B  A  E  E  A  B  B  B 
 ## Levels: A B C D E</code></pre>
 </div>
-<div id="checking-sample-error--" class="section level1">
-<h1>Checking Sample error —————————————————————-</h1>
+<div id="checking-sample-error" class="section level2">
+<h2>Checking Sample error</h2>
 <pre class="r"><code>confM &lt;- confusionMatrix(train2A_pred, train2A$classe)
 sum(diag(confM$table))/sum(confM$table)</code></pre>
 <pre><code>## [1] 0.9964316</code></pre>

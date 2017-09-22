@@ -1,4 +1,4 @@
-# Load and Clean the data -------------------------------------------------
+## Load and Clean the data -------------------------------------------------
 ```{r}
 training <- read.csv("pml-training.csv", header=TRUE)
 testing <- read.csv("pml-test.csv", header=TRUE)
@@ -20,7 +20,7 @@ training <- training[ , nearZvar$nzv==FALSE]
 dim(training)
 
 ```
-# modeling ----------------------------------------------------------------
+## modeling 
 ```{r}
 
 
@@ -41,7 +41,7 @@ testing_pred <- predict(randomForMod, newdata=testing)
 testing_pred
 ```
 
-# Checking Sample error ----------------------------------------------------------------
+## Checking Sample error
 ```{r}
 confM <- confusionMatrix(train2A_pred, train2A$classe)
 sum(diag(confM$table))/sum(confM$table)
